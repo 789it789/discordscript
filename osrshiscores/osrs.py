@@ -8,20 +8,19 @@ try:
 except:
     feedparser = None
 
-
 class Runescape:
 
     def __init__(self, bot):
         self.bot = bot
         self.base_url = \
-            "http://services.runescape.com/m=hiscore_oldschool/index_lite.ws?player="
+            "http://services.runescape.com/m=hiscore_oldschool/hiscorepersonal.ws?user1="
         self.max_level = 99
         self.skill_list = [
             "Overall",
             "Attack",
             "Defence",
             "Strength",
-            "Constitution",
+            "Hitpoints",
             "Ranged",
             "Prayer",
             "Magic",
@@ -38,15 +37,15 @@ class Runescape:
             "Thieving",
             "Slayer",
             "Farming",
-            "Runecrafting",
+            "Runecraft",
             "Hunter",
             "Construction",
         ]
-        self.elite_skills = [23, ]
+        self.skills = [23, ]
         self.skill_levels = self._skill_levels()
-        self.elite_levels = [0.4796 * pow(x, 4) - 12.788 * pow(x, 3) + 228.56 *
+        self.levels = [0.4796 * pow(x, 4) - 12.788 * pow(x, 3) + 228.56 *
                              pow(x, 2) + 2790.8 * x - 31674
-                             for x in range(1, 150)]
+                             for x in range(1, 99)]
 
     def _skill_levels(self):
         xplist = []
@@ -63,14 +62,7 @@ class Runescape:
         for level, currExp in enumerate(self.skill_levels):
             if currExp > exp:
                 return str(level + 1)
-        return '120'
-
-    def _get_elite_level(self, exp):
-        exp = int(exp)
-        for level, currExp in enumerate(self.elite_levels):
-            if currExp > exp:
-                return str(level + 1)
-        return '150'
+        return '99'
 
     def _commafy(self, num):
         try:
@@ -87,8 +79,8 @@ class Runescape:
             if i < len(self.skill_list):
                 splitted = data[i].split(',')
                 if i != 0:
-                    if i in self.elite_skills:
-                        splitted[1] = self._get_elite_level(splitted[2])
+                    if i in self.skills:
+                        splitted[1] = self._get_level(splitted[2])
                     else:
                         splitted[1] = self._get_level(splitted[2])
                 splitted[0] = self._commafy(splitted[0])
@@ -103,7 +95,6 @@ class Runescape:
 
     @commands.command(no_pm=True)
     async def hs(self, *, username):
-        """Gets hiscores info"""
         username = username.replace(" ", "_")
         url = self.base_url + username
         try:
@@ -118,4 +109,4 @@ class Runescape:
 
 def setup(bot):
     n = Runescape(bot)
-bot.add_cog(n)
+    bot.add_cog(n)
