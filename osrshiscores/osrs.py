@@ -1,10 +1,8 @@
+import discord
 from discord.ext import commands
 import aiohttp
 from cogs.utils.chat_formatting import *
 import fractions
-
-import discord
-from discord.ext import commands
 from .utils.dataIO import dataIO
 from .utils.chat_formatting import *
 from .utils import checks
@@ -25,8 +23,7 @@ class Runescape:
 
     def __init__(self, bot):
         self.bot = bot
-        self.base_url = \
-            "http://services.runescape.com/m=hiscore_oldschool/hiscorepersonal.ws?user1="
+        self.base_url = "http://services.runescape.com/m=hiscore_oldschool/hiscorepersonal.ws?user1="
         self.max_level = 99
         self.skill_list = [
             "Overall",
