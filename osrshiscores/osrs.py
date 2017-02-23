@@ -3,6 +3,19 @@ import aiohttp
 from cogs.utils.chat_formatting import *
 import fractions
 
+import discord
+from discord.ext import commands
+from .utils.dataIO import dataIO
+from .utils.chat_formatting import *
+from .utils import checks
+from __main__ import send_cmd_help
+from collections import defaultdict
+import os
+import re
+import aiohttp
+import asyncio
+import logging
+
 try:
     import feedparser
 except:
