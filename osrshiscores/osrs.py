@@ -55,7 +55,7 @@ class Runescape:
         self.skill_levels = self._skill_levels()
         self.levels = [0.4796 * pow(x, 4) - 12.788 * pow(x, 3) + 228.56 *
                              pow(x, 2) + 2790.8 * x - 31674
-                             for x in range(1, 99)]
+                             for x in range(1, 150)]
 
     def _skill_levels(self):
         xplist = [None]
@@ -72,7 +72,7 @@ class Runescape:
         for level, currExp in enumerate(self.skill_levels):
             if currExp > exp:
                 return str(level + 1)
-        return '99'
+        return '150'
 
     def _commafy(self, num):
         try:
