@@ -39,16 +39,16 @@ class Runescape:
             "Farming",
             "Runecraft",
             "Hunter",
-            "Construction",
+            "Construction"
         ]
-        self.skills = [23, ]
+        self.skills = [23, None]
         self.skill_levels = self._skill_levels()
         self.levels = [0.4796 * pow(x, 4) - 12.788 * pow(x, 3) + 228.56 *
                              pow(x, 2) + 2790.8 * x - 31674
                              for x in range(1, 99)]
 
     def _skill_levels(self):
-        xplist = []
+        xplist = [None]
 
         points = 0
         for level in range(1, self.max_level):
