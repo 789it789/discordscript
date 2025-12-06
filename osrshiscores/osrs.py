@@ -11,7 +11,8 @@ class Runescape(commands.Cog):
             "Overall", "Attack", "Defence", "Strength", "Hitpoints", "Ranged",
             "Prayer", "Magic", "Cooking", "Woodcutting", "Fletching", "Fishing",
             "Firemaking", "Crafting", "Smithing", "Mining", "Herblore", "Agility",
-            "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction"
+            "Thieving", "Slayer", "Farming", "Runecraft", "Hunter", "Construction",
+            "Sailing"
         ]
 
     def _commafy(self, num: Optional[str]) -> str:
@@ -43,6 +44,7 @@ class Runescape(commands.Cog):
             else:
                 embed.add_field(name=skill, value="No data", inline=True)
 
+
         embed.set_footer(text="Old School RuneScape Highscores | Data retrieved in real-time")
         return embed
 
@@ -62,7 +64,7 @@ class Runescape(commands.Cog):
                     raw_text = await response.text()
                     lines = raw_text.replace("\r", "").split("\n")
                     data = [line for line in lines if line.strip() and len(line.split(',')) == 3]
-                    data = data[:len(self.skill_list)]
+                    data = data[:len(self.skill_list)]  # Only take skill data
         except aiohttp.ClientError as e:
             print("Network error fetching data from API:", e)
             await interaction.response.send_message("A network error occurred. Please try again later.", ephemeral=True)
